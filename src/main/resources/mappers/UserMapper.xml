@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.store.mapper.UserMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="Id">
+                INSERT INTO
+
+                user  (User_Id, User_Pwd, Salt, User_Name, Phone, Email, Created_User, Created_Time, Modified_User, Modified_Time)
+                VALUE
+
+                ( #{User_Id}, #{User_Pwd}, #{Salt}, #{User_Name}, #{Phone}, #{Email}, #{Created_User}, #{Created_Time}, #{Modified_User}, #{Modified_Time})
+    </insert>
+
+    <select id="findByUserName" resultType="com.xxxx.store.entity.User">
+                SELECT * From
+                user
+                WHERE User_Id =#{User_Id}
+        </select>
+
+    <select id="findId" resultType="com.xxxx.store.entity.User">
+        SELECT * From
+        user
+        where Id = #{Id}
+    </select>
+
+    <update id="UpdatePassword">
+        UPDATE
+        user
+        set
+        User_Pwd=#{newUser_Pwd}, Modified_User=#{User_Id}, Modified_Time=#{Modified_Time}
+        where Id=#{Id}
+    </update>
+
+    <update id="changeAvatar">
+
+        UPDATE user set
+        avatar=#{avatar}, Modified_User=#{User_Id}, Modified_Time=#{Modified_Time}
+        where Id=#{Id}
+    </update>
+
+
+    <delete id="cancellation">
+        DELETE FROM user WHERE Id = #{Id}
+    </delete>
+
+    <select id="findAll" resultType="com.xxxx.store.entity.User">
+        SELECT  * FROM user
+    </select>
+
+</mapper>
+
+<!--        <update id="UpdatePassword"-->
